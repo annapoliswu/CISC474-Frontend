@@ -7,11 +7,12 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 
 export class MenuComponent implements OnInit {
-
+  activeClass = 'activeClass';
+  
   constructor() { }
 
   ngOnInit(): void {
   }
-  @Input() activeClass = 'active';
+  
 
 }
