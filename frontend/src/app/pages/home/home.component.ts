@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProjectsService } from 'src/app/services/projects.service';
 
 @Component({
   selector: 'app-home',
@@ -6,8 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
-  constructor() { }
+  semesters=[];
+  constructor(private projSvc:ProjectsService) { 
+    projSvc.getProjects().subscribe(result=>{
+      this.semesters=result.data.semesters;
+    })
+  }
 
   ngOnInit(): void {
   }

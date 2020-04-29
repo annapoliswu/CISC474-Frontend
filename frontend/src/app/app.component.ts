@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'SearchStays';
+  title = 'ExampleUI';
+  get loggedIn():boolean{
+    return this.authSvc.loggedIn;
+  }
+  constructor(public authSvc:AuthService) {
+    authSvc.authorize();
+  }
+
+  signout(){
+    this.authSvc.logout();
+    return false;
+  }
 }

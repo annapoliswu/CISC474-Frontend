@@ -1,0 +1,29 @@
+<p>listhouse works!</p>
+
+<form [formGroup]="listingForm">
+    <div class ="row">
+
+        <div class="col-sm-8">
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <input type="text" class="form-control" id="title">
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea class="form-control" rows="5" id="description"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="uploadPhoto">Upload Photos</label>
+                <input type="file" accept="image/png, image/jpeg" multiple="multiple" 
+                    class="form-control-file" id="photo">
+            </div>
+        </div>
+
+    </div> <!--end row-->
+</form>
