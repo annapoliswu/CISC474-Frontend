@@ -1,0 +1,9 @@
+<p>home works!</p>
+<div *ngIf='semesters.length>0'>
+<ul>
+    <li *ngFor='let item of semesters'>
+        {{item}}
+    </li>
+</ul>
+</div>
+<div *ngIf='semesters.length==0'>No records found</div>
