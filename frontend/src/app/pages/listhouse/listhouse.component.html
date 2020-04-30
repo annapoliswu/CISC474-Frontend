@@ -1,4 +1,4 @@
-<p>listhouse works!</p>
+<h1 class = "pagetitle">List Your Stay</h1>
 
 <form [formGroup]="listingForm">
     <div class ="row">
@@ -20,8 +20,9 @@
         <div class="col-sm-4">
             <div class="form-group">
                 <label for="uploadPhoto">Upload Photos</label>
-                <input type="file" accept="image/png, image/jpeg" multiple="multiple" 
-                    class="form-control-file" id="photo">
+                <div id = "selectedImages"></div>
+                <input type="file" id = "files" name="files[]"accept="image/png, image/jpeg" multiple="multiple" 
+                    class="form-control-file" id="photo" (change)="onSelectFile($event)">
             </div>
         </div>
 

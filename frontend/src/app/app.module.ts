@@ -11,6 +11,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { ListhouseComponent } from './pages/listhouse/listhouse.component';
+import { HousecardComponent } from './components/housecard/housecard.component';
+import { HousepageComponent } from './pages/housepage/housepage.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { ListhouseComponent } from './pages/listhouse/listhouse.component';
     RegisterComponent,
     AddprojectComponent,
     ListhouseComponent,
+    HousecardComponent,
+    HousepageComponent,
   ],
   imports: [
     BrowserModule,
