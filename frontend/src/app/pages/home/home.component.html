@@ -1,9 +1,13 @@
 <p>home works!</p>
-<div *ngIf='semesters.length>0'>
+<div *ngIf='houses.length>0'>
 <ul>
-    <li *ngFor='let item of semesters'>
-        {{item}}
+    <li *ngFor='let house of houses'>
+        {{house}}
+        <app-housecard></app-housecard>
     </li>
 </ul>
+
+
 </div>
-<div *ngIf='semesters.length==0'>No records found</div>
+
+<div *ngIf='houses.length==0'>No houses found</div>
