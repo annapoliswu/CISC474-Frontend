@@ -22,7 +22,7 @@ export class ListhouseComponent implements OnInit {
   onSelectFile(event) {
     if (event.target.files && event.target.files[0]) {
         var reader = new FileReader();
-        reader.readAsDataURL(event.target.files[1]); // read file as data url
+        reader.readAsDataURL(event.target.files[0]); // read file as data url
         //working on thumbnailing multiple images, files[] is key, also find a way to remove images..
 
         reader.onload = (event) => { // called once readAsDataURL is completed
