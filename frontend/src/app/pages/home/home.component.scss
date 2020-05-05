@@ -1,12 +1,11 @@
 .houseContainer{
-    display:block;
-    text-align: center; 
-    padding: 0;
-    margin: 10px;   
-    background-color: blue;
+    display:block; 
+    text-align: center;
+    //background-color: blue;
 }
 
-.card{
+.houseCard{
     display: inline-block;
-    background-color: black;
+    border: none;
+    //background-color: black;
 }

@@ -1,0 +1,11 @@
+.card:hover{ 
+    -ms-transform: scale(1.05); /* IE 9 */
+    -webkit-transform: scale(1.05); /* Safari */
+    transform: scale(1.05);
+    transition: ease-in-out;
+    transition-duration: .1s;
+}
+
+.card{
+    margin:10px;
+}

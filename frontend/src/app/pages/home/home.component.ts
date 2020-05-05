@@ -22,6 +22,7 @@ export class HomeComponent implements OnInit {
   }
 
   /*
+  //example
   semesters=[];
   constructor(private projSvc:ProjectsService) { 
     projSvc.getProjects().subscribe(result=>{

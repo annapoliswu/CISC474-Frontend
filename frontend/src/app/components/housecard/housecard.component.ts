@@ -6,9 +6,13 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./housecard.component.scss']
 })
 export class HousecardComponent implements OnInit {
+
+  //all things you can input on html tag need decorator
   @Input() cardtitle:string;
   @Input() cardtext:string;
-  constructor() { }
+
+  constructor() { 
+  }
 
   ngOnInit(): void {
   }
