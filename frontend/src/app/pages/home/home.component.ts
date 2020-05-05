@@ -8,10 +8,14 @@ import { HousesService } from 'src/app/services/houses.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  houses;
+  houses = [];
 
   constructor(service: HousesService){
-    this.houses = service.getHouses();
+
+    //calls getHouses function in housesService upon creation? results sent back is array of houses
+    service.getHouses().subscribe(result=>{
+      this.houses = result.data;
+    });
   }
 
   ngOnInit(): void {

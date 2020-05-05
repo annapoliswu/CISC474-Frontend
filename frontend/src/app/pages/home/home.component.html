@@ -1,13 +1,8 @@
 <h1>Browse Stays</h1>
-<div *ngIf='houses.length>0'>
-<ul>
-    <li *ngFor='let house of houses'>
-        {{house}}
-        <app-housecard></app-housecard>
-    </li>
-</ul>
 
-
-</div>
+<ng-container class ="houseContainer" *ngIf='houses.length>0'>
+    <!--for creates multiple of whatever its on-->
+    <app-housecard  class = "card"  *ngFor='let house of houses' cardtitle = {{house.title}} cardtext = {{house.description}}></app-housecard>
+</ng-container>
 
 <div *ngIf='houses.length==0'>No houses found</div>

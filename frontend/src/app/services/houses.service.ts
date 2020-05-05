@@ -1,15 +1,25 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HousesService {
 
-  constructor() { }
+  private path='http://localhost:3000/api/houses/';
 
-  getHouses(){
+  constructor(private http:HttpClient) { }
+
+  getHouses(): Observable<any>{
     //logic to get houses from database here
-    return ["house1", "house2", "house3", "house4"];
+    //return ["house1", "house2", "house3", "house4"];
+    return this.http.get(this.path);
+  }
+  postHouse(){
+    //logic to get houses from database here
+    //return ["house1", "house2", "house3", "house4"];
+    return this.http.get(this.path);
   }
 
 }

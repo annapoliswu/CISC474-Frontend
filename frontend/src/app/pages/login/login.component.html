@@ -1,6 +1,8 @@
 <div *ngIf="error" class="alert alert-danger">{{error}}</div>
 <h1 class = "pagetitle">Login</h1>
+
 <form [formGroup]="loginForm" (ngSubmit)="login()">
+
         {{loginForm.value | json}}
     <div class="form-group">
         <label for="username">Username</label>
@@ -21,6 +23,7 @@
             <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
             Login
         </button>
+        
         <a routerLink="/register" class="btn btn-link">Register</a>
     </div>
 </form>
