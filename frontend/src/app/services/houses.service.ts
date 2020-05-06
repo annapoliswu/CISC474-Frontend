@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
@@ -16,10 +17,8 @@ export class HousesService {
     //return ["house1", "house2", "house3", "house4"];
     return this.http.get(this.path);
   }
-  postHouse(){
-    //logic to get houses from database here
-    //return ["house1", "house2", "house3", "house4"];
-    return this.http.get(this.path);
+  postHouse(obj:any){
+    return this.http.post(this.path, {"title": obj.title, "description": obj.description});
   }
 
 }
