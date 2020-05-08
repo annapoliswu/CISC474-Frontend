@@ -19,9 +19,20 @@ export class ListhouseComponent implements OnInit {
 
   ngOnInit(): void {
     //vars made here must correspond to formControlName on input in html to read input
+    //add validators here!
     this.listingForm=this.formBuilder.group({
       title: [],
-      description: []
+      description: [],
+      street: [],
+      city: [],
+      state: [],
+      zip: [],
+      price: [],
+      bedrooms: [],
+      bathrooms: [],
+      sqfeet: [],
+      contactemail: [],
+      contactphone: []
     });
   }
 
@@ -44,7 +55,21 @@ export class ListhouseComponent implements OnInit {
   //calls postHouse in housesService, add more params to function to get more inputs
   listHouse(){
     this.submitted=true;
-    this.houseService.postHouse({title: this.listingForm.controls.title.value, description: this.listingForm.controls.description.value}).subscribe(response=>{
+    this.houseService.postHouse({
+      title: this.listingForm.controls.title.value, 
+      description: this.listingForm.controls.description.value,
+      street: this.listingForm.controls.street.value,
+      city: this.listingForm.controls.city.value,
+      state:this.listingForm.controls.state.value,
+      zip: this.listingForm.controls.zip.value,
+      price: this.listingForm.controls.price.value,
+      bedrooms: this.listingForm.controls.bedrooms.value,
+      bathrooms: this.listingForm.controls.bathrooms.value,
+      sqfeet: this.listingForm.controls.sqfeet.value,
+      contactemail: this.listingForm.controls.contactemail.value,
+      contactphone: this.listingForm.controls.contactphone.value,
+
+    }).subscribe(response=>{
       console.log("posted");
     },err=>{this.submitted=false;err.message||err;});
   }

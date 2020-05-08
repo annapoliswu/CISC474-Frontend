@@ -18,7 +18,20 @@ export class HousesService {
     return this.http.get(this.path);
   }
   postHouse(obj:any){
-    return this.http.post(this.path, {"title": obj.title, "description": obj.description});
+    return this.http.post(this.path,{
+      "title": obj.title, 
+      "description": obj.description,
+      "street": obj.street,
+      "state": obj.state,
+      "city": obj.city,
+      "zip": obj.zip,
+      "price": obj.price,
+      "bedrooms": obj.bedrooms,
+      "bathrooms": obj.bathrooms,
+      "sqfeet": obj.sqfeet,
+      "contactemail": obj.contactemail,
+      "contactphone": obj.contactphone
+      });
   }
 
 }
