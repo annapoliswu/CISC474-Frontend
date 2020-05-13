@@ -7,6 +7,7 @@ import { AddprojectComponent } from './pages/addproject/addproject.component';
 import { ListhouseComponent } from './pages/listhouse/listhouse.component';
 
 
+
 const routes: Routes = [
   {path:'',redirectTo:'home',pathMatch:'full'},
   {path:'home',component: HomeComponent},

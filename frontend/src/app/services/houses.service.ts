@@ -32,6 +32,11 @@ export class HousesService {
       "contactemail": obj.contactemail,
       "contactphone": obj.contactphone
       });
-  }
+    }
 
+  getHouse(id): Observable<any>{
+    //logic to get houses from database here
+    //return ["house1", "house2", "house3", "house4"];
+    return this.http.get(this.path + id);
+  }
 }
