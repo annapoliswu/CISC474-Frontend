@@ -1,4 +1,42 @@
 .sliderContainer{
-    width: 80%;
+    width: 90%;
     margin: auto;
 }
+
+.info{
+    margin:2% 5%;
+}
+
+.tab{
+    padding-left: 20px;
+}
+
+.icon{
+    padding-right: 10px;
+}
+
+a{
+    text-decoration: none;
+    color:white;
+}
+
+.button{
+    background-color:black;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 600;
+    color:white;
+}
+.email{
+    background-color: rgb(110, 110, 110);
+}
+.email:hover{
+    opacity: .5;
+    transition: all .1s ease-in-out;
+}
+
+.contact{
+    padding-top: 15px;
+}
+
