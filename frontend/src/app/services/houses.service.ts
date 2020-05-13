@@ -16,6 +16,12 @@ export class HousesService {
     //return ["house1", "house2", "house3", "house4"];
     return this.http.get(this.path);
   }
+
+  getHouse(id): Observable<any>{
+    //logic to get houses from database here
+    //return ["house1", "house2", "house3", "house4"];
+    return this.http.get(this.path + id);
+  }
   postHouse(){
     //logic to get houses from database here
     //return ["house1", "house2", "house3", "house4"];

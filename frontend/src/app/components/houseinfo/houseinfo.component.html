@@ -1,0 +1,20 @@
+<div class="modal-header">
+    <h4 class="modal-title">Search Stays</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Title: {{house.title}}, Description: {{house.description}}</p>
+    <div class="sliderContainer">
+    <ng-image-slider #nav
+    [images]="imageObject"
+    [infinite]="false"
+    [autoSlide]="1"
+    [imageSize]="{width: '25%', height: 200}"
+    slideImage="1"></ng-image-slider>
+</div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+  </div>
