@@ -1,20 +1,42 @@
 <div class="modal-header">
-    <h4 class="modal-title">Search Stays</h4>
-    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <p>Title: {{house.title}}, Description: {{house.description}}</p>
-    <div class="sliderContainer">
-    <ng-image-slider #nav
-    [images]="imageObject"
-    [infinite]="false"
-    [autoSlide]="1"
-    [imageSize]="{width: '25%', height: 200}"
-    slideImage="1"></ng-image-slider>
+  <h4 class="modal-title">Search Stays</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
 </div>
+<div class="modal-body">
+  <div class="sliderContainer">
+    <ng-image-slider #nav [images]="imageObject" [infinite]="false" [autoSlide]="1"
+      [imageSize]="{width: '25%', height: 200}" slideImage="1">
+    </ng-image-slider>
   </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+
+  <div class="info">
+
+      <h2>{{house.title}} </h2>
+      <p>{{house.description}}</p>
+        <hr>
+
+      <p> <b>Offering Price:</b> ${{house.price}} </p>
+      <p> <b>Location:</b> {{house.street}}, {{house.city}} {{house.state}}, {{house.zip}} </p>
+      <p> <b>Bedrooms:</b> {{house.bedrooms}} <span class="tab"></span> <b>Bathrooms:</b> {{house.bathrooms}} <span
+          class="tab"></span> <b>Sq Feet:</b> {{house.sqfeet}} </p>
+        <hr>
+
+    <div class=contact>
+      <span class="phone button">
+        <i class="fas fa-phone-alt icon"></i><span>{{house.contactphone}}</span>
+      </span>
+      <span class="tab"></span>
+      <span class="email button">
+        <i class="fas fa-envelope icon"></i> <a
+          href="mailto:{{house.contactemail}}?subject=About your {{house.street}} house on SearchStays">{{house.contactemail}}</a>
+      </span>
+    </div>
+  
   </div>
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+</div>
