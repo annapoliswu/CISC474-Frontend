@@ -61,4 +61,8 @@ export class AuthService {
     this.token=null;
     this.CurrentUser.next(null);
   }
+
+  register(email: string, password:string){
+    return this.http.post<any>(this.path+'register', {email: email, password: password});
+  }
 }

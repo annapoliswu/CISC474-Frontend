@@ -3,7 +3,7 @@
 
 <form [formGroup]="loginForm" (ngSubmit)="login()">
 
-        {{loginForm.value | json}}
+        <!-- {{loginForm.value | json}} -->
     <div class="form-group">
         <label for="username">Username</label>
         <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && loginForm.controls.username.errors }" />

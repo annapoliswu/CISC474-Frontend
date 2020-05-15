@@ -4,6 +4,7 @@
     position:absolute;right:0px;
   }
 </style>
+
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
   <a class="navbar-brand" routerLink='home'>Search Stays</a>
   <!-- Links -->
@@ -12,7 +13,7 @@
       <a class="nav-link" routerLink='home' routerLinkActive='active'>Home</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" routerLink='listhouse' routerLinkActive='active'>List House</a>
+      <a class="nav-link" [class.disabled]='!loggedIn' routerLink='listhouse' routerLinkActive='active'>List House</a>
     </li>
     <!--
     <li class="nav-item">
@@ -20,22 +21,35 @@
     </li>
     -->
   </ul>
+  
   <ul class='navbar-nav navbar-nav-right' [hidden]='loggedIn'>
+    
     <li class='nav-item'>
       <a class="nav-link" routerLink='login' routerLinkActive='active'>Login</a>
     </li>
+
     <li class='nav-item'>
-      <a class="nav-link" routerLink='register' routerLinkActive='active'>Sign Up</a>
+      <a class="nav-link" routerLink='register' routerLinkActive='active'>Register</a>
     </li>
+
   </ul>
+
   <ul class='navbar-nav navbar-nav-right' [hidden]='!loggedIn'>
-    <li class='nav-item'>
-      <span class='nav-link active'>Hello {{authSvc.CurrentUser|async}}</span>
+    <li class='nav-item dropdown'>
+      <a class='nav-link dropdown-toggle active' data-toggle ='dropdown' aria-expanded="false" id="navbarDropdownMenuLink1" aria-haspopup="true">User {{authSvc.CurrentUser|async}}</a>
+      <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink1">
+        <a href="#" class = 'dropdown-item'>Your Listings</a>
+        <a href="#" class = 'dropdown-item'>Favorites</a>
+        <a href="#" class = 'dropdown-item'>Settings</a>
+      </div>
     </li>
+
     <li class='nav-item'>
-      <a class="nav-link" href="#" (click)='signout()'>Sign Out</a>
+      <a class="nav-link" href="#" (click)='signout()' >Sign Out</a>
     </li>
   </ul>
+
+  
 </nav>
 
 <div class="page container-fluid" role="main">

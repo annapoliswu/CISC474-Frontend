@@ -14,8 +14,10 @@ export class ListhouseComponent implements OnInit {
   urls;
   div = document.getElementById("selectedImages");
   submitted = false;
+  loading = false;
+  error;
   
-  constructor(private formBuilder: FormBuilder,private route: ActivatedRoute,private houseService:HousesService) { }
+  constructor(private formBuilder: FormBuilder,private route: ActivatedRoute,private router: Router,private houseService:HousesService) { }
 
   ngOnInit(): void {
     //vars made here must correspond to formControlName on input in html to read input
@@ -55,6 +57,7 @@ export class ListhouseComponent implements OnInit {
   //calls postHouse in housesService, add more params to function to get more inputs
   listHouse(){
     this.submitted=true;
+    this.loading=true;
     this.houseService.postHouse({
       title: this.listingForm.controls.title.value, 
       description: this.listingForm.controls.description.value,
@@ -71,6 +74,11 @@ export class ListhouseComponent implements OnInit {
 
     }).subscribe(response=>{
       console.log("posted");
-    },err=>{this.submitted=false;err.message||err;});
+      this.loading=false;
+      this.listingForm.reset();
+      //this.router.navigate(['/']);  //navigate to a submitted page or smth
+    },err=>{this.submitted=false;this.loading=false;this.error=err.message||err;});
   }
+
+
 }
