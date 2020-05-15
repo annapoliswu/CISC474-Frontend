@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class RegisterComponent implements OnInit {
 
-  loginForm: FormGroup;
+  registerForm: FormGroup;
   loading =false;
   submitted=false;
   returnUrl: string;
@@ -22,7 +22,7 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loginForm=this.formBuilder.group({
+    this.registerForm=this.formBuilder.group({
       username: ['',Validators.required],
       password: ['',Validators.required]
     });
@@ -31,11 +31,11 @@ export class RegisterComponent implements OnInit {
 
   register(){
     this.submitted=true;
-    if (this.loginForm.invalid){
+    if (this.registerForm.invalid){
       return;
     }
     this.loading=true;
-    this.authSvc.register(this.loginForm.controls.username.value,this.loginForm.controls.password.value).subscribe(response=>{
+    this.authSvc.register(this.registerForm.controls.username.value,this.registerForm.controls.password.value).subscribe(response=>{
       this.router.navigate([this.returnUrl]);
     },err=>{this.submitted=false;this.loading=false;this.error=err.message||err;});
   }
