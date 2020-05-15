@@ -67,7 +67,10 @@
                 </div>
             </div>
 
-            <button type="submit" id = "submitButton" class="btn btn-primary float-right">Submit</button>
+            <button type="submit" id = "submitButton" class="btn btn-primary float-right" [disabled]="loading" >
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                Submit
+            </button>
 
         </div>
 
