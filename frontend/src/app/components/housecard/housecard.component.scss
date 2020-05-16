@@ -10,3 +10,21 @@
 .card{
     margin:10px;
 }
+
+.heart{
+    font-size: 24px;
+}
+
+.unfavorited:hover{
+    -ms-transform: scale(1.2); /* IE 9 */
+    -webkit-transform: scale(1.2); /* Safari */
+    transform: scale(1.2);
+    transition: ease-in-out;
+    transition-duration: .1s;
+}
+
+.favorited{
+    color: orange;
+    font-size: 24*1.2px;
+}
+
