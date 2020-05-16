@@ -23,17 +23,17 @@ export class ListhouseComponent implements OnInit {
     //vars made here must correspond to formControlName on input in html to read input
     //add validators here!
     this.listingForm=this.formBuilder.group({
-      title: [],
+      title: ['',Validators.required],
       description: [],
-      street: [],
-      city: [],
-      state: [],
-      zip: [],
-      price: [],
-      bedrooms: [],
-      bathrooms: [],
+      street: ['',Validators.required],
+      city: ['',Validators.required],
+      state: ['',Validators.required],
+      zip: ['',Validators.required],
+      price: ['',Validators.required],
+      bedrooms: ['',Validators.required],
+      bathrooms: ['',Validators.required],
       sqfeet: [],
-      contactemail: [],
+      contactemail: ['',Validators.required],
       contactphone: []
     });
   }
@@ -56,29 +56,41 @@ export class ListhouseComponent implements OnInit {
 
   //calls postHouse in housesService, add more params to function to get more inputs
   listHouse(){
-    this.submitted=true;
-    this.loading=true;
-    this.houseService.postHouse({
-      title: this.listingForm.controls.title.value, 
-      description: this.listingForm.controls.description.value,
-      street: this.listingForm.controls.street.value,
-      city: this.listingForm.controls.city.value,
-      state:this.listingForm.controls.state.value,
-      zip: this.listingForm.controls.zip.value,
-      price: this.listingForm.controls.price.value,
-      bedrooms: this.listingForm.controls.bedrooms.value,
-      bathrooms: this.listingForm.controls.bathrooms.value,
-      sqfeet: this.listingForm.controls.sqfeet.value,
-      contactemail: this.listingForm.controls.contactemail.value,
-      contactphone: this.listingForm.controls.contactphone.value,
+    if(this.listingForm.invalid){
+      return;
+    }
+      this.submitted=true;
+      this.loading=true;
+      this.houseService.postHouse({
+        title: this.listingForm.controls.title.value, 
+        description: this.listingForm.controls.description.value,
+        street: this.listingForm.controls.street.value,
+        city: this.listingForm.controls.city.value,
+        state:this.listingForm.controls.state.value,
+        zip: this.listingForm.controls.zip.value,
+        price: this.listingForm.controls.price.value,
+        bedrooms: this.listingForm.controls.bedrooms.value,
+        bathrooms: this.listingForm.controls.bathrooms.value,
+        sqfeet: this.listingForm.controls.sqfeet.value,
+        contactemail: this.listingForm.controls.contactemail.value,
+        contactphone: this.listingForm.controls.contactphone.value,
 
-    }).subscribe(response=>{
-      console.log("posted");
-      this.loading=false;
-      this.listingForm.reset();
-      //this.router.navigate(['/']);  //navigate to a submitted page or smth
-    },err=>{this.submitted=false;this.loading=false;this.error=err.message||err;});
+      }).subscribe(response=>{
+        console.log("posted");
+        this.loading=false;
+        this.listingForm.reset();
+        /*
+        if(this.listingForm.controls.title.errors){
+        }else{
+          this.listingForm.reset();
+        }
+        */
+        
+        //this.router.navigate(['/']);  //navigate to a submitted page or smth
+      },err=>{this.submitted=false;this.loading=false;this.error=err.message||err;});
   }
+
+
 
 
 }

@@ -1,7 +1,14 @@
 <div class="card" style="width: 15rem;">
-    <img class="card-img-top" src="http://icons.iconarchive.com/icons/paomedia/small-n-flat/512/house-icon.png" alt="Card image cap">
-    <div class="card-body" >
-        <h5 class="card-title" >{{cardtitle}}</h5>
-        <p class="card-text">{{cardtext}}</p>
+    <div class="favButton" [hidden]='!loggedIn'>
+        <i [hidden]='favorited' class="fas fa-heart unfavorited heart" (click)='favorite()'></i>
+        <i [hidden]='!favorited' class="fas fa-heart favorited heart" (click)='unfavorite()'></i>
+    </div>
+    <div class="clickableArea"(click)='openInfo()'>
+        <img class="card-img-top" src="http://icons.iconarchive.com/icons/paomedia/small-n-flat/512/house-icon.png"
+            alt="a nice house">
+        <div class="card-body" >
+            <h5 class="card-title">{{cardtitle}}</h5>
+            <p class="card-text">{{cardtext}}</p>
+        </div>
     </div>
 </div>

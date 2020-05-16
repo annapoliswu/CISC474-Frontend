@@ -2,3 +2,17 @@
 
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
+
+
+.houseCard{
+    display: inline-block;
+    border: none;
+}
+
+.noneFound{
+    color:orange;
+    font-size: 30px;
+    font-weight: 700;
+    text-align: center;
+    padding-top: 10%;
+}

@@ -6,11 +6,11 @@
 </style>
 
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-  <a class="navbar-brand" routerLink='home'>Search Stays</a>
+  <a class="navbar-brand" routerLink='home'><i class="fas fa-home"></i> Search Stays</a>
   <!-- Links -->
   <ul class="navbar-nav">
     <li class="nav-item">
-      <a class="nav-link" routerLink='home' routerLinkActive='active'>Home</a>
+      <a class="nav-link" routerLink='home' routerLinkActive='active'>Browse</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" [class.disabled]='!loggedIn' routerLink='listhouse' routerLinkActive='active'>List House</a>
@@ -38,9 +38,9 @@
     <li class='nav-item dropdown'>
       <a class='nav-link dropdown-toggle active' data-toggle ='dropdown' aria-expanded="false" id="navbarDropdownMenuLink1" aria-haspopup="true">User {{authSvc.CurrentUser|async}}</a>
       <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink1">
-        <a href="#" class = 'dropdown-item'>Your Listings</a>
-        <a href="#" class = 'dropdown-item'>Favorites</a>
-        <a href="#" class = 'dropdown-item'>Settings</a>
+        <a href="#" class = 'dropdown-item'><i class="fas fa-home"></i> Your Listings</a>
+        <a routerLink='favorites' routerLinkActive='active' class = 'dropdown-item'><i class="fas fa-heart"></i> Favorites</a>
+        <a href="#" class = 'dropdown-item'><i class="fas fa-cog"></i> Settings</a>
       </div>
     </li>
 
