@@ -65,4 +65,12 @@ export class AuthService {
   register(email: string, password:string){
     return this.http.post<any>(this.path+'register', {email: email, password: password});
   }
+
+  getFavorites(){
+    let email = "";
+    this.CurrentUser.subscribe((retemail) => {
+      email= retemail;
+    });
+    return this.http.get<any>(this.path + email + '/favorites');
+  }
 }

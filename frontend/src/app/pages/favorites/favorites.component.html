@@ -1,0 +1,11 @@
+
+<h1>Favs</h1>
+
+<div class ="houseContainer" *ngIf='houses.length>0'>
+    <!--for creates multiple of whatever its on-->
+    <app-housecard  class = "houseCard"  *ngFor='let house of houses' cardtitle = {{house.title}} cardtext = {{house.description}} (click)='openInfo(house._id)'></app-housecard>
+</div>
+
+<div *ngIf='houses.length==0'>No houses found</div>
+
+<app-map></app-map>

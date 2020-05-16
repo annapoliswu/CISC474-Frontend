@@ -5,6 +5,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { AddprojectComponent } from './pages/addproject/addproject.component';
 import { ListhouseComponent } from './pages/listhouse/listhouse.component';
+import { FavoritesComponent } from './pages/favorites/favorites.component';
 
 
 
@@ -14,7 +15,8 @@ const routes: Routes = [
   {path:'login',component: LoginComponent},
   {path:'register',component: RegisterComponent},
   {path:'listhouse',component: ListhouseComponent},
-  {path:'addproject',component: AddprojectComponent}
+  {path:'addproject',component: AddprojectComponent},
+  {path:'favorites',component: FavoritesComponent}
   
 ];
 
