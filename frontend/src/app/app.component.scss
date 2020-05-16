@@ -17,7 +17,11 @@ li{
     //background-color: rgb(0, 99, 180) !important;
 }
 
-.nav-item:hover  {
+.navbar-brand:hover {
+    color:  rgb(255, 125, 10);
+}
+
+.nav-item:hover{
     color: #ffffff;
     background-color: rgb(255, 125, 10); /* add background-color to active links */
     height: 100%;

@@ -18,7 +18,7 @@ export class HousecardComponent implements OnInit {
 
   favorited = false;
 
-  constructor( private authSvc:AuthService,  private houseSvc: HousesService,  private modalService: NgbModal) { 
+  constructor( public authSvc:AuthService,  private houseSvc: HousesService,  private modalService: NgbModal) { 
   }
 
   ngOnInit(): void {
@@ -26,11 +26,17 @@ export class HousecardComponent implements OnInit {
 
   favorite(){
     this.favorited = true;
+    this.authSvc.addFavorite(this.houseid).subscribe(result=>{
+      console.log(result);
+    });
     //other logic put id into user etc authSvc.addFavorite(id);
   }
 
   unfavorite(){
     this.favorited = false;
+    this.authSvc.deleteFavorite(this.houseid).subscribe(result=>{
+      console.log(result);
+    });
     //logic to remove id from user favs
   }
 
