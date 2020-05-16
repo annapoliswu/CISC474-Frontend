@@ -14,7 +14,7 @@ export class FavoritesComponent implements OnInit {
   houses = [];
   houseids = [];
 
-  constructor(private route: ActivatedRoute,private router: Router,private authSvc:AuthService, houseSvc: HousesService, private modalService: NgbModal){
+  constructor(private route: ActivatedRoute,private router: Router,private authSvc:AuthService, private houseSvc: HousesService, private modalService: NgbModal){
     authSvc.getFavorites().subscribe(result=>{
       this.houseids = result.data;
       console.log(this.houseids);
@@ -40,11 +40,6 @@ export class FavoritesComponent implements OnInit {
     this.houses = result.data;
   });
   */
- openInfo(id): void {
-  const modalRef = this.modalService.open(HouseinfoComponent, {size: 'xl'});
-  modalRef.componentInstance.id = id;
-  console.log(id);
-}
 
 
 }

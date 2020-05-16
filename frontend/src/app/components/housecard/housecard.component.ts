@@ -18,8 +18,7 @@ export class HousecardComponent implements OnInit {
 
   favorited = false;
 
-  constructor(authSvc:AuthService, houseSvc: HousesService,  private modalService: NgbModal) { 
-
+  constructor( private authSvc:AuthService,  private houseSvc: HousesService,  private modalService: NgbModal) { 
   }
 
   ngOnInit(): void {
@@ -39,6 +38,10 @@ export class HousecardComponent implements OnInit {
     const modalRef = this.modalService.open(HouseinfoComponent, {size: 'xl'});
     modalRef.componentInstance.id = this.houseid;
     console.log(this.houseid);
+  }
+
+  get loggedIn():boolean{
+    return this.authSvc.loggedIn;
   }
 
 

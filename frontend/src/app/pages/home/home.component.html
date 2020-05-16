@@ -5,6 +5,6 @@
     <app-housecard  class = "houseCard"  *ngFor='let house of houses' cardtitle = {{house.title}} cardtext = {{house.description}} houseid = {{house._id}} ></app-housecard>
 </div>
 
-<div *ngIf='houses.length==0'>No houses found</div>
+<div class = "noneFound" *ngIf='houses.length==0'>No houses found.</div>
 
 <app-map></app-map>

@@ -13,6 +13,8 @@
 
 .heart{
     font-size: 24px;
+    padding:12px;
+    //background-color: green;
 }
 
 .unfavorited:hover{
@@ -26,5 +28,15 @@
 .favorited{
     color: orange;
     font-size: 24*1.2px;
+    padding:12*.8px;
+}
+
+.favButton{
+    position: absolute;
+    right: 0;
+}
+
+img{
+    padding: 20px;
 }
 
