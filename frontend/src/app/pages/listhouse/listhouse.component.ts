@@ -24,18 +24,18 @@ export class ListhouseComponent implements OnInit {
     //vars made here must correspond to formControlName on input in html to read input
     //add validators here!
     this.listingForm=this.formBuilder.group({
-      title: ['',Validators.required],
-      description: [],
-      street: [],
-      city: [],
-      state: [],
-      zip: [],
-      price: [],
-      bedrooms: [],
-      bathrooms: [],
-      sqfeet: [],
-      contactemail: [],
-      contactphone: []
+      title: [''],
+      description: [''],
+      street: ['',Validators.required],
+      city: ['',Validators.required],
+      state: ['',Validators.required],
+      zip: ['',Validators.required],
+      price: ['',Validators.required],
+      bedrooms: [''],
+      bathrooms: [''],
+      sqfeet: [''],
+      contactemail: [''],
+      contactphone: ['']
     });
   }
 
@@ -57,10 +57,11 @@ export class ListhouseComponent implements OnInit {
 
   //calls postHouse in housesService, add more params to function to get more inputs
   listHouse(){
-    if(this.listingForm.invalid){
-      return;
-    }
       this.submitted=true;
+        
+      if(this.listingForm.invalid){
+        return;
+      }
       this.loading=true;
       this.houseService.postHouse({
         title: this.listingForm.controls.title.value, 
@@ -77,8 +78,9 @@ export class ListhouseComponent implements OnInit {
         contactphone: this.listingForm.controls.contactphone.value,
 
       }).subscribe(result=>{
-        this.authService.addListing(result.data).subscribe(result => {console.log(result)});
+        this.authService.addListing(result.data).subscribe(res => {console.log(res)});
         this.loading=false;
+        this.submitted=false;
         this.listingForm.reset();
         //this.router.navigate(['/']);  //navigate to a submitted page or smth
       },err=>{this.submitted=false;this.loading=false;this.error=err.message||err;});
