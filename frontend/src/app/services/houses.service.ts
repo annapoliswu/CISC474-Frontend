@@ -34,9 +34,12 @@ export class HousesService {
       });
   }
 
-  getHouse(id): Observable<any>{
+  getHouse(id:string): Observable<any>{
     //logic to get houses from database here
     //return ["house1", "house2", "house3", "house4"];
     return this.http.get(this.path + id);
+  }
+  deleteHouse(id:string): Observable<any>{
+    return this.http.delete<any>(this.path + id);
   }
 }

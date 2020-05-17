@@ -15,8 +15,10 @@ export class HousecardComponent implements OnInit {
   @Input() cardtitle:string;
   @Input() cardtext:string;
   @Input() houseid:string; //passed in in html 
+  @Input() trashEnabled:boolean = false;
 
   favorited:boolean;
+  
 
   constructor( private authSvc:AuthService,  private houseSvc: HousesService,  private modalService: NgbModal) { 
 
@@ -58,6 +60,18 @@ export class HousecardComponent implements OnInit {
 
   get loggedIn():boolean{
     return this.authSvc.loggedIn;
+  }
+
+  delete(){
+    //deletes from user array
+    this.authSvc.deleteListing(this.houseid).subscribe(result=>{
+      console.log('delete ' + result);
+      if(result.status === 'success'){
+        //deletes from database
+        this.houseSvc.deleteHouse(this.houseid).subscribe(result=>{});
+      }
+    });
+
   }
 
 

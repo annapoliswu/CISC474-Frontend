@@ -116,7 +116,7 @@ export class AuthService {
     this.CurrentUser.subscribe((retemail) => {
       email= retemail;
     });
-    return this.http.delete<any>(this.path + email + '/listings/'+houseid);
+    return this.http.delete<any>(this.path + email + '/listings/' +houseid);
   }
 
 
