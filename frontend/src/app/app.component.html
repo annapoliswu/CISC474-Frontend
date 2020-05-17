@@ -38,7 +38,7 @@
     <li class='nav-item dropdown'>
       <a class='nav-link dropdown-toggle active' data-toggle ='dropdown' aria-expanded="false" id="navbarDropdownMenuLink1" aria-haspopup="true">User {{authSvc.CurrentUser|async}}</a>
       <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink1">
-        <a href="#" class = 'dropdown-item'><i class="fas fa-home"></i> Your Listings</a>
+        <a routerLink='listings' class = 'dropdown-item'><i class="fas fa-home"></i> Your Listings</a>
         <a routerLink='favorites' routerLinkActive='active' class = 'dropdown-item'><i class="fas fa-heart"></i> Favorites</a>
         <a href="#" class = 'dropdown-item'><i class="fas fa-cog"></i> Settings</a>
       </div>

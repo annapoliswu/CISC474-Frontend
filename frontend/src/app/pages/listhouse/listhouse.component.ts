@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HousesService } from 'src/app/services/houses.service';
+import { AuthService } from 'src/app/services/auth.service';
 //import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -17,7 +18,7 @@ export class ListhouseComponent implements OnInit {
   loading = false;
   error;
   
-  constructor(private formBuilder: FormBuilder,private route: ActivatedRoute,private router: Router,private houseService:HousesService) { }
+  constructor(private formBuilder: FormBuilder,private route: ActivatedRoute,private router: Router,private houseService:HousesService,private authService:AuthService) { }
 
   ngOnInit(): void {
     //vars made here must correspond to formControlName on input in html to read input
@@ -25,15 +26,15 @@ export class ListhouseComponent implements OnInit {
     this.listingForm=this.formBuilder.group({
       title: ['',Validators.required],
       description: [],
-      street: ['',Validators.required],
-      city: ['',Validators.required],
-      state: ['',Validators.required],
-      zip: ['',Validators.required],
-      price: ['',Validators.required],
-      bedrooms: ['',Validators.required],
-      bathrooms: ['',Validators.required],
+      street: [],
+      city: [],
+      state: [],
+      zip: [],
+      price: [],
+      bedrooms: [],
+      bathrooms: [],
       sqfeet: [],
-      contactemail: ['',Validators.required],
+      contactemail: [],
       contactphone: []
     });
   }
@@ -75,19 +76,14 @@ export class ListhouseComponent implements OnInit {
         contactemail: this.listingForm.controls.contactemail.value,
         contactphone: this.listingForm.controls.contactphone.value,
 
-      }).subscribe(response=>{
-        console.log("posted");
+      }).subscribe(result=>{
+        this.authService.addListing(result.data).subscribe(result => {console.log(result)});
         this.loading=false;
         this.listingForm.reset();
-        /*
-        if(this.listingForm.controls.title.errors){
-        }else{
-          this.listingForm.reset();
-        }
-        */
-        
         //this.router.navigate(['/']);  //navigate to a submitted page or smth
       },err=>{this.submitted=false;this.loading=false;this.error=err.message||err;});
+
+      
   }
 
 
