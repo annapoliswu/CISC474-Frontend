@@ -1,11 +1,26 @@
 .houseContainer{
-    display:block; 
+    display:flex; 
     text-align: center;
     //background-color: blue;
 }
 
 .houseCard{
-    display: inline-block;
     border: none;
     //background-color: black;
 }
+
+.mainContainer{
+    display:flex; 
+    flex-direction: row;
+    text-align: center;
+    justify-content: center;
+    //background-color: blue;
+}
+
+app-map{
+    width: 100%;
+}
+
+input {
+    width: 50%;
+  }

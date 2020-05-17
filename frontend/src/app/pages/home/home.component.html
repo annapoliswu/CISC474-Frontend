@@ -1,10 +1,14 @@
-<h1>Browse Stays</h1>
+<input type="text" class="form-control" (keydown.enter)="$event.preventDefault()" placeholder="Search Address" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search>
+<br />
+<div class="mainContainer">
+    <br />
+    <app-map [houses]='houses' (myEvent)="openInfo($event)"></app-map>
+    <div class="houseContainer" *ngIf='houses.length>0'>
+        <!--for creates multiple of whatever its on-->
+        <app-housecard class="houseCard" *ngFor='let house of houses' cardtitle={{house.title}}
+            cardtext={{house.description}} (click)='openInfo(house._id)'></app-housecard>
+    </div>
 
-<div class ="houseContainer" *ngIf='houses.length>0'>
-    <!--for creates multiple of whatever its on-->
-    <app-housecard  class = "houseCard"  *ngFor='let house of houses' cardtitle = {{house.title}} cardtext = {{house.description}} (click)='openInfo(house._id)'></app-housecard>
+    <div *ngIf='houses.length==0'>No houses found</div>
+    
 </div>
-
-<div *ngIf='houses.length==0'>No houses found</div>
-
-<app-map></app-map>

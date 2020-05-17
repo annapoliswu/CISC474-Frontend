@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef,} from '@angular/core';
 import { ProjectsService } from 'src/app/services/projects.service';
 import { HousesService } from 'src/app/services/houses.service';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -11,6 +11,9 @@ import {HouseinfoComponent} from 'src/app/components/houseinfo/houseinfo.compone
 })
 export class HomeComponent implements OnInit {
   houses = [];
+
+  @ViewChild('search')
+  public searchElementRef: ElementRef;
 
   constructor(service: HousesService, private modalService: NgbModal){
 
