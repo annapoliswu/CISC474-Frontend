@@ -11,7 +11,7 @@
     margin:10px;
 }
 
-.heart{
+.icon{
     font-size: 24px;
     padding:12px;
     //background-color: green;
@@ -34,9 +34,26 @@
 .favButton{
     position: absolute;
     right: 0;
+    bottom:0;
 }
 
-img{
-    padding: 20px;
+
+.trash{
+    position: absolute;
+    left: 0;
+    bottom:0;
+}
+
+.trash:hover{
+    -ms-transform: scale(1.2); /* IE 9 */
+    -webkit-transform: scale(1.2); /* Safari */
+    transform: scale(1.2);
+    transition: ease-in-out;
+    transition-duration: .1s;
+    color: red;
+}
+
+.clickableArea{
+    padding-bottom: 30px;
 }
 

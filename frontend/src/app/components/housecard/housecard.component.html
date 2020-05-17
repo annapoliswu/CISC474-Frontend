@@ -1,8 +1,4 @@
 <div class="card" style="width: 15rem;">
-    <div class="favButton" [hidden]='!loggedIn'>
-        <i [hidden]='favorited' class="fas fa-heart unfavorited heart" (click)='favorite()'></i>
-        <i [hidden]='!favorited' class="fas fa-heart favorited heart" (click)='unfavorite()'></i>
-    </div>
     <div class="clickableArea"(click)='openInfo()'>
         <img class="card-img-top" src="http://icons.iconarchive.com/icons/paomedia/small-n-flat/512/house-icon.png"
             alt="a nice house">
@@ -10,5 +6,10 @@
             <h5 class="card-title">{{cardtitle}}</h5>
             <p class="card-text">{{cardtext}}</p>
         </div>
+    </div>
+    <i class="fas fa-trash-alt trash icon" [hidden] = '!trashEnabled' (click)='delete()'></i>
+    <div class="favButton" [hidden]='!loggedIn'>
+        <i [hidden]='favorited' class="fas fa-heart unfavorited heart icon" (click)='favorite()'></i>
+        <i [hidden]='!favorited' class="fas fa-heart favorited heart icon" (click)='unfavorite()'></i>
     </div>
 </div>

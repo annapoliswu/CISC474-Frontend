@@ -75,7 +75,6 @@ export class AuthService {
     return this.http.get<any>(this.path + email + '/favorites');
   }
 
-  //this does not for some reason
   addFavorite(id:string){
     let email= "";
     this.CurrentUser.subscribe((retemail) => {
@@ -93,6 +92,31 @@ export class AuthService {
     });
     console.log("delete");
     return this.http.delete<any>(this.path + email + '/favorites/'+houseid);
+  }
+
+  getListings(){
+    let email;
+    this.CurrentUser.subscribe((retemail) => {
+      email= retemail;
+    });
+    return this.http.get<any>(this.path + email + '/listings');
+  }
+
+  addListing(id:string){
+    let email;
+    this.CurrentUser.subscribe((retemail) => {
+      email= retemail;
+    });
+    return this.http.post<any>(this.path+'listings', {email: email, id: id});
+  }
+
+  
+  deleteListing(houseid:string){
+    let email;
+    this.CurrentUser.subscribe((retemail) => {
+      email= retemail;
+    });
+    return this.http.delete<any>(this.path + email + '/listings/' +houseid);
   }
 
 
