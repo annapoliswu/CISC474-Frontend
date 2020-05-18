@@ -1,15 +1,14 @@
-
-<h1>Favorites</h1>
+<h1>Your Listings</h1>
 
 <div class ="houseContainer" *ngIf='houses.length>0'>
     <!--for creates multiple of whatever its on-->
     <app-housecard  class = "houseCard"  *ngFor='let house of houses' 
     cardtitle = '{{house.street}}, {{house.city}} {{house.state}}'
     cardtext = '${{house.price}}' 
-    houseid = {{house._id}}>
+    houseid = {{house._id}} 
+    trashEnabled = true>
     </app-housecard>
 </div>
 
-<div class = "noneFound" *ngIf='houses.length==0'>No favorites found! Try adding some with the
-    <i class="fas fa-heart favorited heart"></i>.
+<div class = "noneFound" *ngIf='houses.length==0'>No listings found! Try posting some with our listing form.
 </div>

@@ -17,6 +17,7 @@ import { MapComponent } from './components/map/map.component';
 import { NgImageSliderModule } from 'ng-image-slider';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FavoritesComponent } from './pages/favorites/favorites.component';
+import { UserlistingsComponent } from './pages/userlistings/userlistings.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { FavoritesComponent } from './pages/favorites/favorites.component';
     HousecardComponent,
     HouseinfoComponent,
     MapComponent,
-    FavoritesComponent
+    FavoritesComponent,
+    UserlistingsComponent
   ],
   imports: [
     BrowserModule,

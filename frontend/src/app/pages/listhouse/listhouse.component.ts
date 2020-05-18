@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HousesService } from 'src/app/services/houses.service';
+import { AuthService } from 'src/app/services/auth.service';
 //import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -17,7 +18,7 @@ export class ListhouseComponent implements OnInit {
   loading = false;
   error;
   
-  constructor(private formBuilder: FormBuilder,private route: ActivatedRoute,private router: Router,private houseService:HousesService) { }
+  constructor(private formBuilder: FormBuilder,private route: ActivatedRoute,private router: Router,private houseService:HousesService,private authService:AuthService) { }
 
   ngOnInit(): void {
     //vars made here must correspond to formControlName on input in html to read input
@@ -60,10 +61,11 @@ export class ListhouseComponent implements OnInit {
 
   //calls postHouse in housesService, add more params to function to get more inputs
   listHouse(){
-    if(this.listingForm.invalid){
-      return;
-    }
       this.submitted=true;
+        
+      if(this.listingForm.invalid){
+        return;
+      }
       this.loading=true;
       console.log('test');
       var geoCoder = new google.maps.Geocoder;
