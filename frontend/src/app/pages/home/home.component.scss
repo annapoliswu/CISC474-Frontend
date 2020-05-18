@@ -1,5 +1,63 @@
 .houseContainer{
-    display:block; 
+    display:flex; 
     text-align: center;
+    max-width: 45%;
+    min-width: 45%; 
+    flex-wrap: wrap;
+    max-height: 43.75rem;
+    overflow-y: scroll;
+    padding-top: 5px;
+    padding-bottom: 5px;
     //background-color: blue;
 }
+
+.houseCard{
+    border: none;
+    //background-color: black;
+}
+
+.mainContainer{
+    display:flex; 
+    flex-direction: row;
+    justify-content: left;
+    max-width: 1900px;
+    border-top: solid #7c92a0 1px;
+    border-bottom: solid #7c92a0 1px;
+    box-shadow: 0px 3px 5px -2px rgba(0,0,0,0.75);
+
+
+    //background-color: blue;
+}
+
+app-map{
+    width: 1300px;
+    max-width: 55%;
+}
+
+.searchCon{
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+}
+.fa-search {
+    font-size: x-large;
+    margin-top: auto;
+    margin-bottom: auto;
+    height: 50%;
+    padding: 7px;
+    color: white;
+    background-color:  #7c92a0;
+    border-radius: 0px 2px 2px 0px;
+}
+
+
+.userInput {
+    margin-left: 20px;
+    width: 25rem;
+    border-radius: 2px 0px 0px 2px;
+  }
+
+  #addressLabel{
+      margin-left: 20px;
+      margin-bottom: 0px;
+  }

@@ -23,7 +23,8 @@ export class HouseinfoComponent implements OnInit {
     "bathrooms": "",
     "sqfeet": "",
     "contactemail": "",
-    "contactphone": ""
+    "contactphone": "",
+    "photos": []
 };
   service = null;
 
@@ -34,28 +35,15 @@ export class HouseinfoComponent implements OnInit {
   ngOnInit(): void {
     this.service.getHouse(this.id).subscribe(result=>{
       this.house = result.data;
+      if (this.house.photos.length > 0) {
+        this.house.photos.forEach(h => {
+          this.imageObject.push({image: h, thumbImage: h});
+        })
+      }
     });
   }
 
 
-  imageObject = [{
-    image: 'https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-    thumbImage: 'https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-}, {
-    image: 'https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-    thumbImage: 'https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
-}, {
-    image: 'https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-    thumbImage: 'https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-},{
-    image: 'https://images.pexels.com/photos/2635038/pexels-photo-2635038.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-    thumbImage: 'https://images.pexels.com/photos/2635038/pexels-photo-2635038.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-}, {
-    image: 'https://images.pexels.com/photos/1546166/pexels-photo-1546166.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-    thumbImage: 'https://images.pexels.com/photos/1546166/pexels-photo-1546166.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
-}, {
-    image: 'https://images.pexels.com/photos/2724749/pexels-photo-2724749.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-    thumbImage: 'https://images.pexels.com/photos/2724749/pexels-photo-2724749.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-}];
+  imageObject = [];
 
 }

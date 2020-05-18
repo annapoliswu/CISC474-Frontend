@@ -11,18 +11,23 @@ import { HousesService } from 'src/app/services/houses.service';
 })
 export class UserlistingsComponent implements OnInit {
   houses = [];
+  aservice = null;
+  hservice = null;
 
   constructor(private route: ActivatedRoute,private router: Router,private authSvc:AuthService, private houseSvc: HousesService, private modalService: NgbModal){
-    authSvc.getListings().subscribe(result=>{
-      let houseids = result.data;
-      console.log(houseids);
-      houseids.forEach(houseid=> {
-        houseSvc.getHouse(houseid).subscribe(result=>{this.houses.push(result.data);});
-      });
-    });
+  this.aservice = authSvc;
+  this.hservice = houseSvc;
+
   }
   
   ngOnInit(): void {
+    this.aservice.getListings().subscribe(result=>{
+      let houseids = result.data;
+      console.log(houseids); 
+      houseids.forEach(houseid=> {
+        this.hservice.getHouse(houseid).subscribe(result=>{this.houses.push(result.data);});
+      });
+    });
   }
 
 }

@@ -41,7 +41,8 @@ import { UserlistingsComponent } from './pages/userlistings/userlistings.compone
     NgImageSliderModule,
     NgbModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyC5G_9Kcd5KZWPOqqwNPYtNUfkUmCl67sg'
+      apiKey: 'AIzaSyC5G_9Kcd5KZWPOqqwNPYtNUfkUmCl67sg',
+      libraries: ['places']
     })
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi:true}],

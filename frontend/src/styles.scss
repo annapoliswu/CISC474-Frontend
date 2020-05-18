@@ -16,3 +16,55 @@
     text-align: center;
     padding-top: 10%;
 }
+
+.footerImage{
+    height: 150px;
+    width: 700px;
+}
+
+.footerImageFlip{
+    height: 150px;
+    width: 700px;
+    transform: scaleX(-1);
+}
+
+
+#footerContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+    background-color: #eaeaea;
+}
+
+
+body {
+    margin: 0 0 100px;
+    /* bottom = footer height */
+    background-color: #eaeaea;
+}
+
+footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 150px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.btn-primary {
+    background-color: #7c92a0 !important;
+    border-color: #7c92a0;
+}
+
+.btn-primary:hover {
+    background-color: orange !important;
+    border-color: orange;
+}
+

@@ -1,5 +1,7 @@
+<div class="headCon">
 <div *ngIf="error" class="alert alert-danger">{{error}}</div>
-<h1 class = "pagetitle">Register</h1>
+
+<h4 style="padding: 10px 0px;">Sign-up for an account to be eligible for listing property!</h4>
 
 <form [formGroup]="registerForm" (ngSubmit)="register()">
 
@@ -26,3 +28,4 @@
         <a routerLink="/login" class="btn btn-link">Login</a>
     </div>
 </form>
+</div>

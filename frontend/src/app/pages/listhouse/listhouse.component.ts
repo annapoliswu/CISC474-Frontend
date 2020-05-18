@@ -17,6 +17,7 @@ export class ListhouseComponent implements OnInit {
   submitted = false;
   loading = false;
   error;
+  photos = [];
   
   constructor(private formBuilder: FormBuilder,private route: ActivatedRoute,private router: Router,private houseService:HousesService,private authService:AuthService) { }
 
@@ -24,7 +25,6 @@ export class ListhouseComponent implements OnInit {
     //vars made here must correspond to formControlName on input in html to read input
     //add validators here!
     this.listingForm=this.formBuilder.group({
-      title: [''],
       description: [''],
       street: ['',Validators.required],
       city: ['',Validators.required],
@@ -35,23 +35,34 @@ export class ListhouseComponent implements OnInit {
       bathrooms: [''],
       sqfeet: [''],
       contactemail: [''],
-      contactphone: ['']
+      contactphone: [''],
+      photos: [],
     });
   }
 
   onSelectFile(event) {
+    var self = this;
     if (event.target.files && event.target.files[0]) {
-        var reader = new FileReader();
-        reader.readAsDataURL(event.target.files[0]); // read file as data url
-        //working on thumbnailing multiple images, files[] is key, also find a way to remove images..
-
-        reader.onload = (event) => { // called once readAsDataURL is completed
-          this.urls = event.target.result;  
-          var img = new Image(); 
-          img.src = this.urls;
-          img.width = 200;
-          document.getElementById('selectedImages').appendChild(img);
-        }
+        
+        for (var i = 0; i < event.target.files.length; i++) {
+          (function(file) {
+          var reader = new FileReader();
+          reader.readAsDataURL(event.target.files[i]); // read file as data url
+          //working on thumbnailing multiple images, files[] is key, also find a way to remove images..
+  
+          reader.onload = (event) => { // called once readAsDataURL is completed
+            self.urls = event.target.result;  
+            self.photos.push(event.target.result);
+            //this.houseService.postPhoto({photo: event.target.result}).subscribe(response=>{
+              //console.log("posted");
+            //},err=>{this.submitted=false;this.loading=false;this.error=err.message||err;});
+            var img = new Image(); 
+            img.src = self.urls;
+            img.width = 200;
+            document.getElementById('selectedImages').appendChild(img);
+          }
+          })(event.target.files[i]);
+        };
       }
   }
 
@@ -63,29 +74,56 @@ export class ListhouseComponent implements OnInit {
         return;
       }
       this.loading=true;
-      this.houseService.postHouse({
-        title: this.listingForm.controls.title.value, 
-        description: this.listingForm.controls.description.value,
-        street: this.listingForm.controls.street.value,
-        city: this.listingForm.controls.city.value,
-        state:this.listingForm.controls.state.value,
-        zip: this.listingForm.controls.zip.value,
-        price: this.listingForm.controls.price.value,
-        bedrooms: this.listingForm.controls.bedrooms.value,
-        bathrooms: this.listingForm.controls.bathrooms.value,
-        sqfeet: this.listingForm.controls.sqfeet.value,
-        contactemail: this.listingForm.controls.contactemail.value,
-        contactphone: this.listingForm.controls.contactphone.value,
+      console.log('test');
+      var geoCoder = new google.maps.Geocoder;
+      var address = this.listingForm.controls.street.value +  ',' + this.listingForm.controls.city.value + ',' + this.listingForm.controls.state.value;
+      var lat;
+      var long;
+      var self = this;
+      geoCoder.geocode( { 'address': address}, function(results, status) {
+        if (status == 'OK') {
+          lat = results[0].geometry.location.lat();
+          long = results[0].geometry.location.lng();
 
-      }).subscribe(result=>{
-        this.authService.addListing(result.data).subscribe(res => {console.log(res)});
-        this.loading=false;
-        this.submitted=false;
-        this.listingForm.reset();
-        //this.router.navigate(['/']);  //navigate to a submitted page or smth
-      },err=>{this.submitted=false;this.loading=false;this.error=err.message||err;});
+          self.houseService.postHouse({
+            title: results[0].formatted_address, 
+            description: self.listingForm.controls.description.value,
+            street: self.listingForm.controls.street.value,
+            city: self.listingForm.controls.city.value,
+            state:self.listingForm.controls.state.value,
+            zip: self.listingForm.controls.zip.value,
+            price: self.listingForm.controls.price.value,
+            bedrooms: self.listingForm.controls.bedrooms.value,
+            bathrooms: self.listingForm.controls.bathrooms.value,
+            sqfeet: self.listingForm.controls.sqfeet.value,
+            contactemail: self.listingForm.controls.contactemail.value,
+            contactphone: self.listingForm.controls.contactphone.value,
+            photos: self.photos,
+            lat: lat,
+            long: long
+          }).subscribe(response=>{
+            self.authService.addListing(response.data).subscribe(res => {console.log(res)});
+            console.log("posted");
+            self.loading=false;
+            self.listingForm.reset();
+            self.router.navigateByUrl('/listings')
 
-      
+            /*
+            if(this.listingForm.controls.title.errors){
+            }else{
+              this.listingForm.reset();
+            }
+            */
+            
+            //this.router.navigate(['/']);  //navigate to a submitted page or smth
+          },err=>{self.submitted=false;self.loading=false;self.error=err.message||err;});
+
+        } else {
+          alert('Geocode was not successful for the following reason: ' + status);
+        }
+      });
+
+
   }
 
 
