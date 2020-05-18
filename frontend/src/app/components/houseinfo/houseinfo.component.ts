@@ -23,7 +23,8 @@ export class HouseinfoComponent implements OnInit {
     "bathrooms": "",
     "sqfeet": "",
     "contactemail": "",
-    "contactphone": ""
+    "contactphone": "",
+    "photo": ""
 };
   service = null;
 
@@ -34,6 +35,9 @@ export class HouseinfoComponent implements OnInit {
   ngOnInit(): void {
     this.service.getHouse(this.id).subscribe(result=>{
       this.house = result.data;
+      if (this.house.photo != "") {
+        this.imageObject.push({image: this.house.photo, thumbImage: this.house.photo});
+      }
     });
   }
 

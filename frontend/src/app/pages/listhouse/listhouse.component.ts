@@ -23,18 +23,19 @@ export class ListhouseComponent implements OnInit {
     //vars made here must correspond to formControlName on input in html to read input
     //add validators here!
     this.listingForm=this.formBuilder.group({
-      title: ['',Validators.required],
-      description: [],
+      title: [''],
+      description: [''],
       street: ['',Validators.required],
       city: ['',Validators.required],
       state: ['',Validators.required],
       zip: ['',Validators.required],
       price: ['',Validators.required],
-      bedrooms: ['',Validators.required],
-      bathrooms: ['',Validators.required],
-      sqfeet: [],
-      contactemail: ['',Validators.required],
-      contactphone: []
+      bedrooms: [''],
+      bathrooms: [''],
+      sqfeet: [''],
+      contactemail: [''],
+      contactphone: [''],
+      photos: [],
     });
   }
 
@@ -46,6 +47,9 @@ export class ListhouseComponent implements OnInit {
 
         reader.onload = (event) => { // called once readAsDataURL is completed
           this.urls = event.target.result;  
+          //this.houseService.postPhoto({photo: event.target.result}).subscribe(response=>{
+            //console.log("posted");
+          //},err=>{this.submitted=false;this.loading=false;this.error=err.message||err;});
           var img = new Image(); 
           img.src = this.urls;
           img.width = 200;
@@ -61,33 +65,52 @@ export class ListhouseComponent implements OnInit {
     }
       this.submitted=true;
       this.loading=true;
-      this.houseService.postHouse({
-        title: this.listingForm.controls.title.value, 
-        description: this.listingForm.controls.description.value,
-        street: this.listingForm.controls.street.value,
-        city: this.listingForm.controls.city.value,
-        state:this.listingForm.controls.state.value,
-        zip: this.listingForm.controls.zip.value,
-        price: this.listingForm.controls.price.value,
-        bedrooms: this.listingForm.controls.bedrooms.value,
-        bathrooms: this.listingForm.controls.bathrooms.value,
-        sqfeet: this.listingForm.controls.sqfeet.value,
-        contactemail: this.listingForm.controls.contactemail.value,
-        contactphone: this.listingForm.controls.contactphone.value,
+      console.log('test');
+      var geoCoder = new google.maps.Geocoder;
+      var address = this.listingForm.controls.street.value +  ',' + this.listingForm.controls.city.value + ',' + this.listingForm.controls.state.value;
+      var lat;
+      var long;
+      var self = this;
+      geoCoder.geocode( { 'address': address}, function(results, status) {
+        if (status == 'OK') {
+          lat = results[0].geometry.location.lat();
+          long = results[0].geometry.location.lng();
 
-      }).subscribe(response=>{
-        console.log("posted");
-        this.loading=false;
-        this.listingForm.reset();
-        /*
-        if(this.listingForm.controls.title.errors){
-        }else{
-          this.listingForm.reset();
+          self.houseService.postHouse({
+            title: self.listingForm.controls.title.value, 
+            description: self.listingForm.controls.description.value,
+            street: self.listingForm.controls.street.value,
+            city: self.listingForm.controls.city.value,
+            state:self.listingForm.controls.state.value,
+            zip: self.listingForm.controls.zip.value,
+            price: self.listingForm.controls.price.value,
+            bedrooms: self.listingForm.controls.bedrooms.value,
+            bathrooms: self.listingForm.controls.bathrooms.value,
+            sqfeet: self.listingForm.controls.sqfeet.value,
+            contactemail: self.listingForm.controls.contactemail.value,
+            contactphone: self.listingForm.controls.contactphone.value,
+            lat: lat,
+            long: long
+          }).subscribe(response=>{
+            console.log("posted");
+            self.loading=false;
+            self.listingForm.reset();
+            /*
+            if(this.listingForm.controls.title.errors){
+            }else{
+              this.listingForm.reset();
+            }
+            */
+            
+            //this.router.navigate(['/']);  //navigate to a submitted page or smth
+          },err=>{self.submitted=false;self.loading=false;self.error=err.message||err;});
+
+        } else {
+          alert('Geocode was not successful for the following reason: ' + status);
         }
-        */
-        
-        //this.router.navigate(['/']);  //navigate to a submitted page or smth
-      },err=>{this.submitted=false;this.loading=false;this.error=err.message||err;});
+      });
+
+
   }
 
 

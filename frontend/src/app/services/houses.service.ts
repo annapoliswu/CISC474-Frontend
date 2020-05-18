@@ -30,9 +30,17 @@ export class HousesService {
       "bathrooms": obj.bathrooms,
       "sqfeet": obj.sqfeet,
       "contactemail": obj.contactemail,
-      "contactphone": obj.contactphone
+      "contactphone": obj.contactphone,
+      "lat": obj.lat,
+      "long": obj.long
       });
     }
+
+    postPhoto(obj:any){
+      return this.http.post(this.path + "photo",{
+        "photo": obj.photo, 
+        });
+      }
 
   getHouse(id): Observable<any>{
     //logic to get houses from database here

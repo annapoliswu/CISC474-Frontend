@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, NgZone, Input, Output, EventEmitter } from '@angular/core';
 import { MapsAPILoader, MouseEvent } from '@agm/core';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {HouseinfoComponent} from 'src/app/components/houseinfo/houseinfo.component'
 
 @Component({
   selector: 'app-map',
@@ -16,13 +18,14 @@ export class MapComponent implements OnInit {
   @ViewChild('search')
   public searchElementRef: ElementRef;
   @Input() houses:any; 
-  @Output() myEvent = new EventEmitter<number>();
+  //@Output() myEvent = new EventEmitter<number>();
 
 
   constructor(
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
     private elRef: ElementRef,
+    private modalService: NgbModal
   ) { }
 
 
@@ -63,10 +66,10 @@ export class MapComponent implements OnInit {
       });
     }
   }
-
-  callParent(id) : void {
-    console.log(id)
-    this.myEvent.emit(id);
+  openInfo(houseid): void {
+    const modalRef = this.modalService.open(HouseinfoComponent, {size: 'xl'});
+    modalRef.componentInstance.id = houseid;
+    console.log(houseid);
   }
 
 
