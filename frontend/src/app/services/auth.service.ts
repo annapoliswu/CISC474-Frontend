@@ -61,4 +61,39 @@ export class AuthService {
     this.token=null;
     this.CurrentUser.next(null);
   }
+
+  register(email: string, password:string){
+    return this.http.post<any>(this.path+'register', {email: email, password: password});
+  }
+
+  //this works fine
+  getFavorites(){
+    let email = "";
+    this.CurrentUser.subscribe((retemail) => {
+      email= retemail;
+    });
+    return this.http.get<any>(this.path + email + '/favorites');
+  }
+
+  //this does not for some reason
+  addFavorite(id:string){
+    let email= "";
+    this.CurrentUser.subscribe((retemail) => {
+      email= retemail;
+    });
+    console.log("in addfav");
+    return this.http.post<any>(this.path+'favorites', {email: email, id: id});
+  }
+
+  
+  deleteFavorite(houseid:string){
+    let email = "";
+    this.CurrentUser.subscribe((retemail) => {
+      email= retemail;
+    });
+    console.log("delete");
+    return this.http.delete<any>(this.path + email + '/favorites/'+houseid);
+  }
+
+
 }

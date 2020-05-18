@@ -7,6 +7,26 @@
     padding-bottom: 100px;
 }
 
+li{
+    padding: 5px 15px;
+}
+
+.navbar{
+    padding-top: 0;
+    padding-bottom: 0;
+    //background-color: rgb(0, 99, 180) !important;
+}
+
+.navbar-brand:hover {
+    color:  rgb(255, 125, 10);
+}
+
+.nav-item:hover{
+    color: #ffffff;
+    background-color: rgb(255, 125, 10); /* add background-color to active links */
+    height: 100%;
+}
+
 @media only screen and (max-width: 600px) { //screen 600 and lower
     .page{
         padding: 20px 50px; 
@@ -15,3 +35,6 @@
         padding-bottom: 50px;
     }
 }
+
+
+

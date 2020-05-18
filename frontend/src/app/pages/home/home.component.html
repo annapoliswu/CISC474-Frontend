@@ -2,13 +2,12 @@
 <br />
 <div class="mainContainer">
     <br />
-    <app-map [houses]='houses' (myEvent)="openInfo($event)"></app-map>
-    <div class="houseContainer" *ngIf='houses.length>0'>
-        <!--for creates multiple of whatever its on-->
-        <app-housecard class="houseCard" *ngFor='let house of houses' cardtitle={{house.title}}
-            cardtext={{house.description}} (click)='openInfo(house._id)'></app-housecard>
+    <app-map [houses]='houses'></app-map>
+    <div class ="houseContainer" *ngIf='houses.length>0'>
+        <!--for creates multiple of whatever its on  -->  
+        <app-housecard  class = "houseCard"  *ngFor='let house of houses' cardtitle = {{house.title}} cardtext = {{house.description}} houseid = {{house._id}} ></app-housecard>
     </div>
-
-    <div *ngIf='houses.length==0'>No houses found</div>
     
+
+<div class = "noneFound" *ngIf='houses.length==0'>No houses found.</div>    
 </div>
