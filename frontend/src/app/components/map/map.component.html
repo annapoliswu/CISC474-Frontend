@@ -4,7 +4,4 @@
   <agm-marker *ngFor='let house of houses' latitude={{house.lat}} longitude={{house.long}} [markerDraggable]="false"
     (dragEnd)="markerDragEnd($event)" (markerClick)='openInfo(house._id)'></agm-marker>
 </agm-map>
-<h5>Address: {{address}}</h5>
-<div>Latitude: {{latitude}}</div>
-<div>Longitude: {{longitude}}</div>
 </div> 

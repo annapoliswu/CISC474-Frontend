@@ -10,17 +10,34 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class HomeComponent implements OnInit {
   houses = [];
+  housesFiltered = [];
+  zip = null;
 
   constructor(service: HousesService){
 
     //calls getHouses function in housesService upon creation? results sent back is array of houses
     service.getHouses().subscribe(result=>{
       this.houses = result.data;
+      this.housesFiltered = result.data;
     });
   }
 
   ngOnInit(): void {
   }
+
+  
+  filterCards(zip) {
+    var arr = [];
+    this.zip = zip;
+    this.houses.forEach(h => {
+      if (h.zip != null && h.zip == zip) {
+        arr.push(h);
+      }
+    })
+    this.housesFiltered = arr;
+    
+    console.log(zip);
+}
 
 
   /*

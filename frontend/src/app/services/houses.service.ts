@@ -31,6 +31,7 @@ export class HousesService {
       "sqfeet": obj.sqfeet,
       "contactemail": obj.contactemail,
       "contactphone": obj.contactphone,
+      "photos": obj.photos,
       "lat": obj.lat,
       "long": obj.long
       });

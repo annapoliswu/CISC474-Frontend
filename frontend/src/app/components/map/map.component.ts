@@ -11,14 +11,14 @@ import {HouseinfoComponent} from 'src/app/components/houseinfo/houseinfo.compone
 export class MapComponent implements OnInit {
   latitude: number = 0;
   longitude: number = 0;
-  zoom: number;
+  zoom: number = 15;
   address: string;
   private geoCoder;
 
   @ViewChild('search')
   public searchElementRef: ElementRef;
   @Input() houses:any; 
-  //@Output() myEvent = new EventEmitter<number>();
+  @Output() searchResult = new EventEmitter<string>();
 
 
   constructor(
@@ -34,22 +34,24 @@ export class MapComponent implements OnInit {
     this.mapsAPILoader.load().then(() => {
       //this.setCurrentLocation(); 
       this.geoCoder = new google.maps.Geocoder;
-
-      let autocomplete = new google.maps.places.Autocomplete(this.elRef.nativeElement.parentNode.parentNode.children[0]);
+      var search = <HTMLInputElement>document.getElementById('search');
+      let autocomplete = new google.maps.places.Autocomplete(search);
       autocomplete.addListener("place_changed", () => {
         this.ngZone.run(() => {
           //get the place result
           let place: google.maps.places.PlaceResult = autocomplete.getPlace();
-
+          search.value = "";
           //verify result
           if (place.geometry === undefined || place.geometry === null) {
+            alert('Address not found!');
+            //this.elRef.nativeElement.parentNode.parentNode.children[0]
             return;
           }
-
           //set latitude, longitude and zoom
           this.latitude = place.geometry.location.lat();
           this.longitude = place.geometry.location.lng();
           this.zoom = 15;
+          this.getAddress(this.latitude, this.longitude);
         });
       });
     });
@@ -90,6 +92,18 @@ export class MapComponent implements OnInit {
         if (results[0]) {
           this.zoom = 12;
           this.address = results[0].formatted_address;
+          var x = document.getElementById('addressLabel');
+          x.innerHTML = 'Results near: ' + this.address;
+          var zip;
+          for (var i = 0; i < results[0].address_components.length; i++) {
+            for (var j = 0; j < results[0].address_components[i].types.length; j++) {
+              if (results[0].address_components[i].types[j] == "postal_code") {
+                zip = results[0].address_components[i].long_name;
+              }
+            }
+          }
+          this.sendZip(zip);
+          
         } else {
           window.alert('No results found');
         }
@@ -98,6 +112,10 @@ export class MapComponent implements OnInit {
       }
 
     });
+  }
+
+  sendZip(zip) {
+    this.searchResult.emit(zip);
   }
 
 }

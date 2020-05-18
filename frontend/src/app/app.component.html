@@ -6,14 +6,14 @@
 </style>
 
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-  <a class="navbar-brand" routerLink='home'><i class="fas fa-home"></i> Search Stays</a>
   <!-- Links -->
+  <div>
   <ul class="navbar-nav">
     <li class="nav-item">
       <a class="nav-link" routerLink='home' routerLinkActive='active'>Browse</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" [class.disabled]='!loggedIn' routerLink='listhouse' routerLinkActive='active'>List House</a>
+      <a class="nav-link" [hidden]='!loggedIn' routerLink='listhouse' routerLinkActive='active'>List House</a>
     </li>
     <!--
     <li class="nav-item">
@@ -21,37 +21,42 @@
     </li>
     -->
   </ul>
+</div>
+
+  <a class="navbar-brand n" routerLink='home' id='navLogo'><i class="fas fa-home"></i> SearchStays</a>
+
+    <ul class='navbar-nav' [hidden]='loggedIn'>
   
-  <ul class='navbar-nav navbar-nav-right' [hidden]='loggedIn'>
-    
-    <li class='nav-item'>
-      <a class="nav-link" routerLink='login' routerLinkActive='active'>Login</a>
-    </li>
-
-    <li class='nav-item'>
-      <a class="nav-link" routerLink='register' routerLinkActive='active'>Register</a>
-    </li>
-
-  </ul>
-
-  <ul class='navbar-nav navbar-nav-right' [hidden]='!loggedIn'>
-    <li class='nav-item dropdown'>
-      <a class='nav-link dropdown-toggle active' data-toggle ='dropdown' aria-expanded="false" id="navbarDropdownMenuLink1" aria-haspopup="true">User {{authSvc.CurrentUser|async}}</a>
-      <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink1">
-        <a routerLink='listings' class = 'dropdown-item'><i class="fas fa-home"></i> Your Listings</a>
-        <a routerLink='favorites' routerLinkActive='active' class = 'dropdown-item'><i class="fas fa-heart"></i> Favorites</a>
-        <a href="#" class = 'dropdown-item'><i class="fas fa-cog"></i> Settings</a>
-      </div>
-    </li>
-
-    <li class='nav-item'>
-      <a class="nav-link" href="#" (click)='signout()' >Sign Out</a>
-    </li>
-  </ul>
+      <li class='nav-item'>
+        <a class="nav-link" routerLink='login' routerLinkActive='active'>Login</a>
+      </li>
+  
+      <li class='nav-item'>
+        <a class="nav-link" routerLink='register' routerLinkActive='active'>Register</a>
+      </li>
+  
+    </ul>
+  
+    <ul class='navbar-nav' [hidden]='!loggedIn'>
+      <li class='nav-item dropdown' style="font-size: large !important">
+        <a class='nav-link dropdown-toggle active'  style="font-size: large !important;"data-toggle='dropdown' aria-expanded="false"
+          id="navbarDropdownMenuLink1" aria-haspopup="true">{{authSvc.CurrentUser|async}}</a>
+        <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink1">
+          <a routerLink='listings' class='dropdown-item'><i class="fas fa-home"></i> Your Listings</a>
+          <a routerLink='favorites' routerLinkActive='active' class='dropdown-item'><i class="fas fa-heart"></i>
+            Favorites</a>
+          <a href="#" class='dropdown-item'><i class="fas fa-cog"></i> Settings</a>
+        </div>
+      </li>
+  
+      <li class='nav-item'>
+        <a class="nav-link" href="#" (click)='signout()'>Sign Out</a>
+      </li>
+    </ul>
 
   
 </nav>
 
-<div class="page container-fluid" role="main">
+<div class="page container-fluid" id="mainCon" role="main">
   <router-outlet></router-outlet>
 </div>

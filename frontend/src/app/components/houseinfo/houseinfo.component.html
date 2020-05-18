@@ -6,8 +6,8 @@
 </div>
 <div class="modal-body">
   <div class="sliderContainer">
-    <ng-image-slider #nav [images]="imageObject" [infinite]="false" [autoSlide]="1"
-      [imageSize]="{width: '25%', height: 200}" slideImage="1">
+    <ng-image-slider #nav [images]="imageObject" [infinite]="false"
+     [slideImage]="1" [manageImageRatio]="true" [animationSpeed]=.3 [imageSize]="{width: '50%', height: '50%'}">
     </ng-image-slider>
   </div>
 

@@ -1,10 +1,11 @@
-<div class="card" style="width: 15rem;">
+<div class="card">
     <div class="clickableArea"(click)='openInfo()'>
-        <img class="card-img-top" src="http://icons.iconarchive.com/icons/paomedia/small-n-flat/512/house-icon.png"
-            alt="a nice house">
+        <div class="imgHolder" >
+
+        </div>
         <div class="card-body" >
-            <h5 class="card-title">{{cardtitle}}</h5>
-            <p class="card-text">{{cardtext}}</p>
+            <h5 class="card-title" id="ctitle">{{cardtitle}}</h5>
+            <p  style="margin-left: 30px;" class="card-text">{{cardtext}}</p>
         </div>
     </div>
     <i class="fas fa-trash-alt trash icon" [hidden] = '!trashEnabled' (click)='delete()'></i>

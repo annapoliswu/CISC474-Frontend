@@ -12,17 +12,24 @@ import { HousesService } from 'src/app/services/houses.service';
 })
 export class FavoritesComponent implements OnInit {
   houses = [];
+  autsv = null;
+  hsvc = null;
 
   constructor(private route: ActivatedRoute,private router: Router,private authSvc:AuthService, private houseSvc: HousesService, private modalService: NgbModal){
-    authSvc.getFavorites().subscribe(result=>{
+    this.autsv = authSvc;
+    this.hsvc = houseSvc;
+
+  }
+  ngOnInit(): void {
+    var self = this;
+    this.autsv.getFavorites().subscribe(result=>{
       let houseids = result.data;
       console.log(houseids);
       houseids.forEach(houseid=> {
-        houseSvc.getHouse(houseid).subscribe(result=>{this.houses.push(result.data);});
+        this.hsvc.getHouse(houseid).subscribe(result=>{self.houses.push(result.data);console.log(self.houses)});
       });
+
     });
-  }
-  ngOnInit(): void {
   }
 /*
   authService.getFavorites().subscribe(result=>{

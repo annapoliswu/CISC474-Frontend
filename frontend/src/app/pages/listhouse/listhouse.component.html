@@ -1,18 +1,9 @@
+<div class="headCon">
 <h1 class="pagetitle">List Your Stay</h1>
 <form [formGroup]="listingForm" (ngSubmit)="listHouse()">
     <div class="row">
 
         <div class="col-md-8">
-            <div class="relatedItems">
-                <div class="form-group">
-                    <label for="title">Title:</label>
-                    <input type="text" formControlName="title" class="form-control" id="title" placeholder="Title" >
-                </div>
-                <div class="form-group">
-                    <label for="description">Description:</label>
-                    <textarea formControlName="description" class="form-control" rows="5" id="description" placeholder="Description"></textarea>
-                </div>
-            </div>
 
             <div class="relatedItems">
                 <div class="form-group">
@@ -67,6 +58,13 @@
                 </div>
             </div>
 
+            <div class="relatedItems">
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <textarea formControlName="description" class="form-control" rows="5" id="description" placeholder="Description"></textarea>
+                </div>
+            </div>
+
             <button type="submit" id = "submitButton" class="btn btn-primary float-right" [disabled]="loading" >
                 <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                 Submit
@@ -86,3 +84,4 @@
     </div><!--end row-->
     
 </form>
+</div>

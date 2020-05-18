@@ -1,14 +1,20 @@
-<input type="text" class="form-control" (keydown.enter)="$event.preventDefault()" placeholder="Search Address" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search>
+<div class="searchCon">
+<input type="text" class="form-control userInput" id="search" (keydown.enter)="$event.preventDefault()" placeholder="Search Address" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search>
+<i class="fas fa-search"></i>
+</div>
 <br />
+<h5 id="addressLabel"></h5>
 <div class="mainContainer">
     <br />
-    <app-map [houses]='houses'></app-map>
+    <app-map [houses]='houses' (searchResult)='filterCards($event)'></app-map>
     <div class ="houseContainer" *ngIf='houses.length>0'>
         <!--for creates multiple of whatever its on  -->  
-        <app-housecard  class = "houseCard"  *ngFor='let house of houses' 
+        <app-housecard  class = "houseCard"  *ngFor='let house of housesFiltered' 
         cardtitle = '{{house.street}}, {{house.city}} {{house.state}}'
         cardtext = '${{house.price}}' 
-        houseid = {{house._id}} >
+        houseid = {{house._id}}
+        thumbnail = {{house.photos[0]}}
+         >
         </app-housecard>
     </div>
 <div class = "noneFound" *ngIf='houses.length==0'>No houses found.</div>    

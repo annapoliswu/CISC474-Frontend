@@ -17,6 +17,7 @@ export class ListhouseComponent implements OnInit {
   submitted = false;
   loading = false;
   error;
+  photos = [];
   
   constructor(private formBuilder: FormBuilder,private route: ActivatedRoute,private router: Router,private houseService:HousesService,private authService:AuthService) { }
 
@@ -24,7 +25,6 @@ export class ListhouseComponent implements OnInit {
     //vars made here must correspond to formControlName on input in html to read input
     //add validators here!
     this.listingForm=this.formBuilder.group({
-      title: [''],
       description: [''],
       street: ['',Validators.required],
       city: ['',Validators.required],
@@ -41,21 +41,28 @@ export class ListhouseComponent implements OnInit {
   }
 
   onSelectFile(event) {
+    var self = this;
     if (event.target.files && event.target.files[0]) {
-        var reader = new FileReader();
-        reader.readAsDataURL(event.target.files[0]); // read file as data url
-        //working on thumbnailing multiple images, files[] is key, also find a way to remove images..
-
-        reader.onload = (event) => { // called once readAsDataURL is completed
-          this.urls = event.target.result;  
-          //this.houseService.postPhoto({photo: event.target.result}).subscribe(response=>{
-            //console.log("posted");
-          //},err=>{this.submitted=false;this.loading=false;this.error=err.message||err;});
-          var img = new Image(); 
-          img.src = this.urls;
-          img.width = 200;
-          document.getElementById('selectedImages').appendChild(img);
-        }
+        
+        for (var i = 0; i < event.target.files.length; i++) {
+          (function(file) {
+          var reader = new FileReader();
+          reader.readAsDataURL(event.target.files[i]); // read file as data url
+          //working on thumbnailing multiple images, files[] is key, also find a way to remove images..
+  
+          reader.onload = (event) => { // called once readAsDataURL is completed
+            self.urls = event.target.result;  
+            self.photos.push(event.target.result);
+            //this.houseService.postPhoto({photo: event.target.result}).subscribe(response=>{
+              //console.log("posted");
+            //},err=>{this.submitted=false;this.loading=false;this.error=err.message||err;});
+            var img = new Image(); 
+            img.src = self.urls;
+            img.width = 200;
+            document.getElementById('selectedImages').appendChild(img);
+          }
+          })(event.target.files[i]);
+        };
       }
   }
 
@@ -79,7 +86,7 @@ export class ListhouseComponent implements OnInit {
           long = results[0].geometry.location.lng();
 
           self.houseService.postHouse({
-            title: self.listingForm.controls.title.value, 
+            title: results[0].formatted_address, 
             description: self.listingForm.controls.description.value,
             street: self.listingForm.controls.street.value,
             city: self.listingForm.controls.city.value,
@@ -91,12 +98,16 @@ export class ListhouseComponent implements OnInit {
             sqfeet: self.listingForm.controls.sqfeet.value,
             contactemail: self.listingForm.controls.contactemail.value,
             contactphone: self.listingForm.controls.contactphone.value,
+            photos: self.photos,
             lat: lat,
             long: long
           }).subscribe(response=>{
+            self.authService.addListing(response.data).subscribe(res => {console.log(res)});
             console.log("posted");
             self.loading=false;
             self.listingForm.reset();
+            self.router.navigateByUrl('/listings')
+
             /*
             if(this.listingForm.controls.title.errors){
             }else{
